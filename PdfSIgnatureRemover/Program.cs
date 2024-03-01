@@ -1,25 +1,28 @@
 ﻿using iText.Forms;
 using iText.Kernel.Pdf;
-using System;
 
 class Program
 {
     static void Main()
     {
+        //Hardcoded pdf path for pdf document.
         string inputPdfPath = @"C:\Users\ASUS\Desktop\Pdf sign\sign.pdf";
+
+        //Hardcoded output pdf document with removed signature.
         string outputPdfPath = @"C:\Users\ASUS\Desktop\Pdf sign\removedsign.pdf";
 
         try
         {
             RemoveSignature(inputPdfPath, outputPdfPath);
-            Console.WriteLine("Digital signature removed successfully.");
+            Console.WriteLine("Digital signature removed successfully!");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error: {ex.Message}");
+            Console.WriteLine($"Something went wrong: {ex.Message}");
         }
     }
 
+    //Method for removing signatures
     static void RemoveSignature(string inputPdfPath, string outputPdfPath)
     {
         using (PdfReader reader = new PdfReader(inputPdfPath))
@@ -41,11 +44,11 @@ class Program
                     }
                 }
 
-                // Optionally remove other signature-related information from the document
-                // pdfDoc.GetCatalog().GetPdfObject().Remove(PdfName.Perms);
-                // pdfDoc.GetCatalog().GetPdfObject().Remove(PdfName.Signatures);
-                // pdfDoc.GetCatalog().GetPdfObject().Remove(PdfName.AA);
-                // pdfDoc.GetCatalog().GetPdfObject().Remove(PdfName.V);
+                 //Optionally remove other signature-related information from the document
+                //pdfDoc.GetCatalog().GetPdfObject().Remove(PdfName.Perms);
+                //pdfDoc.GetCatalog().GetPdfObject().Remove(PdfName.Signed);
+                //pdfDoc.GetCatalog().GetPdfObject().Remove(PdfName.AA);
+                //pdfDoc.GetCatalog().GetPdfObject().Remove(PdfName.V);
 
                 pdfDoc.Close();
             }
